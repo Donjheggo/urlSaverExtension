@@ -25,7 +25,19 @@ body{
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+#delete-btn{
+    margin-top: 5px;
+    padding: 10px;
+    border: 0;
+    background-color: rgb(230, 109, 109);
+    border-radius: .3rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 } 
+
 
 #save-urls{
     list-style: none;

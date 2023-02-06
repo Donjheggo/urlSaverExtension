@@ -1,14 +1,29 @@
 let myList = []
 
-let inputEl = document.getElementById("input-el")
-let saveBtn = document.getElementById("save-btn")
-let saveUrls = document.getElementById("save-urls")
+const inputEl = document.getElementById("input-el");
+const saveBtn = document.getElementById("save-btn");
+const deleteBtn = document.getElementById("delete-btn");
+const saveUrls = document.getElementById("save-urls")
+
+const localStorageItems = JSON.parse(localStorage.getItem("saveUrls"))
+
+if(localStorageItems){
+    myList = localStorageItems
+    renderUrls()
+}
 
 saveBtn.addEventListener("click", () => {
     myList.push(inputEl.value)
+    inputEl.value = ""
+    localStorage.setItem("saveUrls", JSON.stringify(myList))
     renderUrls()
 })
 
+deleteBtn.addEventListener("click", () => {
+    localStorage.clear()
+    myList = []
+    renderUrls()
+})
 
 function renderUrls(){
     let url = ""
@@ -21,10 +36,4 @@ function renderUrls(){
     }
     saveUrls.innerHTML = url
 }
-
-
-function saveLocalStorage(){
-    localStorage.setItem("Save Links", JSON.stringify(myList))
-}
-
 
