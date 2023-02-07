@@ -2,9 +2,11 @@ let myUrls = []
 
 const inputEl = document.getElementById("input-el");
 const saveInput = document.getElementById("save-input");
-const deleteBtn = document.getElementById("delete-btn");
+const deleteRecent = document.getElementById("delete-recent")
+const deleteAll = document.getElementById("delete-all")
 const saveUrls = document.getElementById("save-urls");
 const saveTab = document.getElementById("save-tab")
+
 
 let localStorageItems = JSON.parse(localStorage.getItem("saveUrls"))
 
@@ -28,7 +30,13 @@ saveTab.addEventListener("click", () => {
     })
 })
 
-deleteBtn.addEventListener("click", () => {
+deleteRecent.addEventListener("click", () => {
+    myUrls.pop()
+    localStorage.setItem("saveUrls", JSON.stringify(myUrls))
+    render(myUrls)
+})
+
+deleteAll.addEventListener("click", () => {
     localStorage.clear();
     myUrls = []
     render(myUrls);
@@ -37,7 +45,7 @@ deleteBtn.addEventListener("click", () => {
 function render(urls) {
     let url = ""
     for(let i = 0; i < urls.length; i++){
-        url += `<li> 
+        url += `<li>
                     <a href="${urls[i]}" target="_blank">
                         ${urls[i]}
                     </a>
@@ -45,4 +53,5 @@ function render(urls) {
     }
     saveUrls.innerHTML = url
 }
+
 

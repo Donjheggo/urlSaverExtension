@@ -2,7 +2,7 @@ body{
     margin: 0;
     font-family: monospace;
     padding: 10px;
-    min-width: 400px;
+    min-width: 500px;
 }
 
 #input-el{
@@ -12,7 +12,6 @@ body{
     padding: 10px;
     border-radius: .3rem;
     font-size: 20px;
-
     
 }
 
@@ -27,7 +26,7 @@ body{
     cursor: pointer;
 }
 
-#delete-btn{
+#delete-all, #delete-recent{
     margin-top: 5px;
     padding: 10px;
     border: 0;
@@ -38,14 +37,19 @@ body{
     cursor: pointer;
 } 
 
-
 #save-urls{
     list-style: none;
     padding-left: 0;
 }
 
-a   {
+a{
     text-decoration: none;
     font-size: 20px;
     color:rgb(13, 235, 13);
 }
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
