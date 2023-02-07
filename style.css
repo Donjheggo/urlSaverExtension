@@ -16,7 +16,7 @@ body{
     
 }
 
-#save-btn{
+#save-input, #save-tab{
     margin-top: 5px;
     padding: 10px;
     border: 0;

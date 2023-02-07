@@ -1,36 +1,45 @@
-let myList = []
+let myUrls = []
 
 const inputEl = document.getElementById("input-el");
-const saveBtn = document.getElementById("save-btn");
+const saveInput = document.getElementById("save-input");
 const deleteBtn = document.getElementById("delete-btn");
-const saveUrls = document.getElementById("save-urls")
+const saveUrls = document.getElementById("save-urls");
+const saveTab = document.getElementById("save-tab")
 
-const localStorageItems = JSON.parse(localStorage.getItem("saveUrls"))
+let localStorageItems = JSON.parse(localStorage.getItem("saveUrls"))
 
 if(localStorageItems){
-    myList = localStorageItems
-    renderUrls()
+    myUrls = localStorageItems
+    render(myUrls);
 }
 
-saveBtn.addEventListener("click", () => {
-    myList.push(inputEl.value)
+saveInput.addEventListener("click", () => {
+    myUrls.push(inputEl.value)
     inputEl.value = ""
-    localStorage.setItem("saveUrls", JSON.stringify(myList))
-    renderUrls()
+    localStorage.setItem("saveUrls", JSON.stringify(myUrls))
+    render(myUrls)
+})
+
+saveTab.addEventListener("click", () => {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) =>{
+        myUrls.push(tabs[0].url)
+        localStorage.setItem("saveUrls", JSON.stringify(myUrls))
+        render(myUrls)
+    })
 })
 
 deleteBtn.addEventListener("click", () => {
-    localStorage.clear()
-    myList = []
-    renderUrls()
+    localStorage.clear();
+    myUrls = []
+    render(myUrls);
 })
 
-function renderUrls(){
+function render(urls) {
     let url = ""
-    for(let i = 0; i < myList.length; i++){
+    for(let i = 0; i < urls.length; i++){
         url += `<li> 
-                    <a href="${myList[i]}" target="_blank">
-                        ${myList[i]}
+                    <a href="${urls[i]}" target="_blank">
+                        ${urls[i]}
                     </a>
                 </li>`
     }
